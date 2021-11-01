@@ -1,0 +1,37 @@
+CREATE TABLE `clientes` ( 
+  `cif` VARCHAR(15) NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  `direccion` VARCHAR(100) NOT NULL,
+  `tfNum1` VARCHAR(15) NOT NULL,
+  `tfNum2` VARCHAR(15) NOT NULL,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`cif`)
+);
+CREATE TABLE `servicios` ( 
+  `numero` INT AUTO_INCREMENT NOT NULL,
+  `fecha` DATE NOT NULL,
+  `tipo` VARCHAR(50) NOT NULL,
+  `cantidad` DECIMAL(11,0) NOT NULL,
+  `comentario` TEXT NOT NULL,
+  `dni` VARCHAR(15) NOT NULL,
+  `cif` VARCHAR(15) NOT NULL,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`numero`)
+);
+CREATE TABLE `trabajadores` ( 
+  `dni` VARCHAR(15) NOT NULL,
+  `nombre` VARCHAR(15) NOT NULL,
+  `apellido` VARCHAR(15) NOT NULL,
+  `saldo` DECIMAL(11,0) NOT NULL,
+  `fecha` DATE NOT NULL,
+  `matricula` VARCHAR(10) NOT NULL,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`dni`)
+);
+CREATE TABLE `coches` ( 
+  `matricula` VARCHAR(10) NOT NULL,
+  `marca` VARCHAR(50) NOT NULL,
+  `modelo` VARCHAR(50) NOT NULL,
+  `año` INT NOT NULL,
+  `dni` VARCHAR(15) NOT NULL,
+  CONSTRAINT `PRIMARY` PRIMARY KEY (`matricula`)
+);
+ALTER TABLE `servicios` ADD CONSTRAINT `servicios_FK` FOREIGN KEY (`dni`) REFERENCES `trabajadores` (`dni`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `servicios` ADD CONSTRAINT `servicios_FK_1` FOREIGN KEY (`cif`) REFERENCES `clientes` (`cif`) ON DELETE RESTRICT ON UPDATE RESTRICT;
